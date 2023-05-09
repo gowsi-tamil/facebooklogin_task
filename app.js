@@ -11,7 +11,6 @@ let FacebookStrategy = require('passport-facebook').Strategy
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
 let dotnenv = require('dotenv');
-//const todorouter = require("./routes/todo");
 const tocontroller= require("./controllers/todo");
 const uploadcontroller= require("./controllers/upload");
 
@@ -53,7 +52,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//app.use("/todos", todorouter);
 
 // setup passport session - authentication middleware for Node.js
 passport.serializeUser(function (user, done) {

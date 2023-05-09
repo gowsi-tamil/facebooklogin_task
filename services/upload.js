@@ -12,8 +12,12 @@ class uploadservices{
   
   
     async upload(data) {
-     
+      console.log(" qwrbeg f" )
+
+      //console.log(data.file == undefined )
+   
   const obj = {
+  
     name:data.file.originalname,
     image:{
       data:data.file.buffer,

@@ -62,12 +62,12 @@
 
             <div>
                 <label for ="name">Name:</label> 
-            <input type ="text" name="name" id="name" />
+            <input type ="text" name="name" id="name" required />
         </div>
 
         <div>
             <label for ="image">Image:</label> 
-        <input type ="file" name="image" id="image" />
+        <input type ="file" name="image" id="image" required />
     </div>
     <div>
         <button type ="submit">upload image</button>
@@ -85,8 +85,7 @@
                             <p><%= task.desc %></p>
                             <p>Status: <%= task.completed %></p>
                             <div class="btn-group">
-                                <!-- <a class="btn btn-secondary" href="/todos/<%= task._id %>/edit" role="button">Update</a> -->
-                                <!-- <button type="submit" class="btn btn-primary">update</button> -->
+
 
                                 <form method="post" action="/todos/update/<%= task._id %>">
                                     <div class="form-group">
