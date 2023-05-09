@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs'); %>
+    
+        <!-- jQuery library -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-JZNDeIkR1Y+KkNNNHMj723LAx5mxZpLYCenyf5gFrOwK/2CWKwK8aVoWudEkaB1W" crossorigin="anonymous"></script>
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-LTHtvbcH8laTpyT/DbLE/0R6ZKj6O1U6vx01U6aRi6LcU6YxE+q3rJi73fsQZtsPyI64ffcmQo5G5aznwWTzLw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+        <!-- Bootstrap JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha512-6jL+p+HZ1d6U9AV6tfPbvoIcY/GNPA3qJrztb2/d/eZV7BCuOVs3qX4xuQ+FXyv7OtnT1TfSj+TCNZRZpfd7Zg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </head>
+    
+    <body class="container">
+        <header>
+            <%- include('../partials/menu.ejs'); %>
+        </header>
+        <div class="container jumbotron d-flex flex-column  align-items-center">
+            <h1>Your Account</h1>
+            <div class="underline"></div>
+            <h3>Hello, <%= user %>.</h3>
+            <form method="post" action="/todos">
+                <div class="form-group">
+                    <label for="taskname">Task Name</label>
+                    <input type="text" class="form-control" id="taskname" name="taskname" required>
+                </div>
+                <div class="form-group">
+                    <label for="desc">Description</label>
+                    <textarea class="form-control" id="desc" name="desc" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" id="status" name="completed" required>
+                        <option value="" selected disabled>Choose...</option>
+                        <option value="incomplete">Incomplete</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Task</button> 
+            </form>
+            <a class="btn btn-danger mt-4" href="/logout" role="button">Logout</a>
+            <div class="tasks-list mt-4">
+                <% if (tasks && tasks.length > 0) { %>
+                    <ul>
+                        <% tasks.forEach(function(task) { %>
+                            <li>
+                                <h4><%= task.taskname %></h4>
+                                <p><%= task.desc %></p>
+                                <% if (task.completed === 'completed') { %>
+                                    <span class="badge badge-success">Completed</span>
+                                <% } else { %>
+                                    <span class="badge badge-danger">Incomplete</span>
+                                <% } %>
+                                <form class="d-inline" method="post" action="/todos/<%= task._id %>?_method=DELETE">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger ml-2">Delete</button>
+                                </form>
+                            </li>
+                        <% }); %>
+                    </ul>
+                <% } else { %>
+                    <p>No tasks found.</p>
+                <% } %>
+            </div>
+        </div>
+        <footer>
+            <%- include('../partials/footer.ejs'); %>
+        </footer>
+    </body>
+    
